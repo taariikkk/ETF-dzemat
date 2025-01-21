@@ -21,8 +21,11 @@ const Login = () => {
       <div>
         <NaslovStranice naslovStranice={"Prijava"} />
         <Dugme text={"Prijavi se"} onClick={() => dispatch(setPrijavljen(true), navigate("/početna"))} />
-        <p className="cursor-default mt-4" onClick={() => navigate("/registracija")}>
-          Nemate račun? <a className="underline cursor-pointer">Registrujte se!</a>
+        <p className="cursor-default mt-4">
+          Nemate račun?{" "}
+          <a className="underline cursor-pointer" onClick={() => navigate("/registracija")}>
+            Registrujte se!
+          </a>
         </p>
       </div>
     )
