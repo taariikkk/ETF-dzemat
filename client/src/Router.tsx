@@ -7,7 +7,7 @@ import Registracija from "./main-components/Registracija";
 import Layout from "./main-components/Layout";
 import Uputstvo from "./main-components/Uputstvo";
 import ShoppingLista from "./main-components/ShoppingLista";
-import Donation from "./main-components/Donacija";
+import Donacija from "./main-components/Donacija";
 
 const Router = () => {
   return (
@@ -20,10 +20,10 @@ const Router = () => {
             <Route path="/početna" element={<Pocetna />} />
             <Route path="/uputstva" element={<Uputstvo />} />
             <Route path="/shopping-lista" element={<ShoppingLista />} />
-            <Route path="/donacija" element={<Donation />} />
+            <Route path="/donacija" element={<Donacija />} />
           </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Route>
-        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
