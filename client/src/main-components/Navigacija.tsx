@@ -31,7 +31,7 @@ const Navigacija = () => {
       <div
         className={
           "py-1 rounded-full w-14 mx-1 " +
-          (aktivnaIkona !== id && "transition duration-300 hover:shadow-md hover:shadow-blue-500 cursor-pointer ")
+          (aktivnaIkona !== id && "transition duration-200 hover:shadow-lg hover:shadow-blue-500 cursor-pointer ")
         }
         onClick={() => aktivnaIkona !== id && (setAktivnaIkona(id), navigate(link))}
       >
