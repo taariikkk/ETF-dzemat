@@ -2,18 +2,18 @@ import { useNavigate } from "react-router";
 import { useAppSelector } from "../redux/hooks";
 import { useEffect } from "react";
 
-const Signup = () => {
+const Registracija = () => {
   const navigate = useNavigate();
 
-  const { loggedIn } = useAppSelector((s) => s.etfszm);
+  const { prijavljen } = useAppSelector((s) => s.etfszm);
 
   useEffect(() => {
-    if (loggedIn) navigate("/početna", { replace: true });
+    if (prijavljen) navigate("/početna", { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    !loggedIn && (
+    !prijavljen && (
       <div>
         <h1>Registracija</h1>
         <button onClick={() => navigate("/prijava")}>Potvrdi</button>
@@ -22,4 +22,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Registracija;

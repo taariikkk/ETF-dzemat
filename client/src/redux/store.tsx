@@ -16,7 +16,7 @@ function loadFromSessionStorage(): { etfszm: InitialStateType } | undefined {
     } else {
       const newReduxStore = {
         etfszm: {
-          loggedIn: false,
+          prijavljen: false,
         },
       };
       return newReduxStore;

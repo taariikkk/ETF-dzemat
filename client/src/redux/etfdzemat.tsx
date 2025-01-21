@@ -2,25 +2,25 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface InitialStateType {
-  loggedIn: boolean;
+  prijavljen: boolean;
 }
 
 const initialState: InitialStateType = {
-  loggedIn: false,
+  prijavljen: false,
 };
 
 export const etfdzematSlice = createSlice({
   name: "etfdzemat",
   initialState,
   reducers: {
-    setLoggedIn: (state, action: PayloadAction<boolean>) => {
+    setPrijavljen: (state, action: PayloadAction<boolean>) => {
       console.log(action);
 
-      state.loggedIn = action.payload;
+      state.prijavljen = action.payload;
     },
   },
 });
 
-export const { setLoggedIn } = etfdzematSlice.actions;
+export const { setPrijavljen } = etfdzematSlice.actions;
 
 export default etfdzematSlice.reducer;
