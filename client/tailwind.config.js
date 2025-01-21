@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        pozadina: "rgb(220, 230, 225)",
+        pozadinaEkrana: "rgb(220, 230, 225)",
       },
     },
   },
