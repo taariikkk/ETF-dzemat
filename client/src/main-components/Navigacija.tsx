@@ -41,7 +41,7 @@ const Navigacija = () => {
   };
 
   return (
-    <div className="max-w-xs bg-black rounded-3xl flex py-2 px-1 justify-evenly mx-auto sticky">
+    <div className="max-w-xs bg-black rounded-3xl flex py-2 px-1 justify-evenly mx-auto fixed bottom-4 left-2/4 -translate-x-2/4">
       {ikone.map(({ id, Ikona, link }) => (
         <IkonaNavigacije key={id} id={id} Ikona={Ikona} link={link} />
       ))}

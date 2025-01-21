@@ -8,12 +8,15 @@ const Logout = () => {
   const dispatch = useDispatch();
 
   return (
-    <MdLogout
-      onClick={() => {
-        dispatch(setPrijavljen(false));
-        navigate("/prijava");
-      }}
-    />
+    <div className="fixed top-10 left-4 cursor-pointer">
+      <MdLogout
+        onClick={() => {
+          dispatch(setPrijavljen(false));
+          navigate("/prijava");
+        }}
+        size={30}
+      />
+    </div>
   );
 };
 
