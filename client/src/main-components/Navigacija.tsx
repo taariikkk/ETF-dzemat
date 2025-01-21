@@ -8,25 +8,25 @@ import { useNavigate } from "react-router";
 
 type IkonaNavigacijeType = {
   id: number;
-  Ikona: IconType;
   link: string;
+  Ikona: IconType;
 };
 
 const bojaAktivne = "rgb(50, 125, 220)";
 
 const ikone = [
-  { id: 1, Ikona: IoHomeOutline, link: "/početna" },
-  { id: 2, Ikona: HiOutlineBookOpen, link: "/uputstva" },
-  { id: 3, Ikona: FiShoppingCart, link: "/shopping-lista" },
-  { id: 4, Ikona: LuCreditCard, link: "/donacija" },
+  { id: 1, link: "/početna", Ikona: IoHomeOutline },
+  { id: 2, link: "/uputstva", Ikona: HiOutlineBookOpen },
+  { id: 3, link: "/shopping-lista", Ikona: FiShoppingCart },
+  { id: 4, link: "/donacija", Ikona: LuCreditCard },
 ];
 
 const Navigacija = () => {
-  const [aktivnaIkona, setAktivnaIkona] = useState(1);
+  const [aktivnaIkona, setAktivnaIkona] = useState(ikone.find((ikona) => ikona.link === location.pathname)?.id || 1);
 
   const navigate = useNavigate();
 
-  const IkonaNavigacije: React.FC<IkonaNavigacijeType> = ({ id, Ikona, link }) => {
+  const IkonaNavigacije: React.FC<IkonaNavigacijeType> = ({ id, link, Ikona }) => {
     return (
       <div
         className="w-16"
@@ -35,14 +35,14 @@ const Navigacija = () => {
           navigate(link);
         }}
       >
-        <Ikona color={aktivnaIkona === id ? bojaAktivne : "white"} className="mx-auto cursor-pointer" />
+        <Ikona color={aktivnaIkona === id ? bojaAktivne : "white"} className="mx-auto cursor-pointer text-3xl" />
       </div>
     );
   };
 
   return (
     <div className="max-w-xs bg-black rounded-3xl flex py-2 px-1 justify-evenly mx-auto fixed bottom-4 left-2/4 -translate-x-2/4">
-      {ikone.map(({ id, Ikona, link }) => (
+      {ikone.map(({ id, link, Ikona }) => (
         <IkonaNavigacije key={id} id={id} Ikona={Ikona} link={link} />
       ))}
     </div>

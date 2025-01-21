@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { useAppSelector } from "../redux/hooks";
 import { useEffect } from "react";
 import NaslovStranice from "../reusable/NaslovStranice";
+import Dugme from "../reusable/Dugme";
 
 const Registracija = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Registracija = () => {
     !prijavljen && (
       <div>
         <NaslovStranice naslovStranice={"Registracija"} />
-        <button onClick={() => navigate("/prijava")}>Potvrdi</button>
+        <Dugme text={"Potvrdi"} onClick={() => navigate("/prijava")} />
       </div>
     )
   );
