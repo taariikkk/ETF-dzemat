@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { setPrijavljen } from "../redux/etfdzemat";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useEffect } from "react";
+import NaslovStranice from "../reusable/NaslovStranice";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Login = () => {
   return (
     !prijavljen && (
       <div>
-        <h1>Prijava</h1>
+        <NaslovStranice naslovStranice={"Prijava"} />
         <button onClick={() => dispatch(setPrijavljen(true), navigate("/početna"))}>Prijavi se</button>
         <div onClick={() => navigate("/registracija")}>Nemate račun? Registrirajte se!</div>
       </div>

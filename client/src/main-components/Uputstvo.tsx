@@ -1,5 +1,11 @@
+import NaslovStranice from "../reusable/NaslovStranice";
+
 const Uputstvo = () => {
-  return <div>Uputstvo</div>;
+  return (
+    <>
+      <NaslovStranice naslovStranice={"Uputstva"} />
+    </>
+  );
 };
 
 export default Uputstvo;

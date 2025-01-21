@@ -1,5 +1,11 @@
+import NaslovStranice from "../reusable/NaslovStranice";
+
 const ShoppingLista = () => {
-  return <div>ShoppingLista</div>;
+  return (
+    <>
+      <NaslovStranice naslovStranice={"Shopping lista"} />
+    </>
+  );
 };
 
 export default ShoppingLista;

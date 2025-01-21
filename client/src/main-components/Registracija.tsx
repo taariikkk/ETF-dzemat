@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import { useAppSelector } from "../redux/hooks";
 import { useEffect } from "react";
+import NaslovStranice from "../reusable/NaslovStranice";
 
 const Registracija = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Registracija = () => {
   return (
     !prijavljen && (
       <div>
-        <h1>Registracija</h1>
+        <NaslovStranice naslovStranice={"Registracija"} />
         <button onClick={() => navigate("/prijava")}>Potvrdi</button>
       </div>
     )

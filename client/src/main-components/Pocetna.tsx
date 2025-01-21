@@ -1,5 +1,11 @@
+import NaslovStranice from "../reusable/NaslovStranice";
+
 const Pocetna = () => {
-  return <div>Pocetna</div>;
+  return (
+    <>
+      <NaslovStranice naslovStranice={"Početna"} />
+    </>
+  );
 };
 
 export default Pocetna;
