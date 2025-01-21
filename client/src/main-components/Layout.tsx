@@ -10,7 +10,7 @@ const Layout = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen w-screen bg-pozadina text-center text-4xl py-8 px-0">
       <Outlet />
     </div>
   );
