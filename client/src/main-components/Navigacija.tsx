@@ -29,13 +29,15 @@ const Navigacija = () => {
   const IkonaNavigacije: React.FC<IkonaNavigacijeType> = ({ id, link, Ikona }) => {
     return (
       <div
-        className="w-16"
-        onClick={() => {
-          setAktivnaIkona(id);
-          navigate(link);
-        }}
+        className={
+          "py-1 rounded-full w-14 mx-1 " +
+          (aktivnaIkona !== id
+            ? "transition duration-300 hover:shadow-lg hover:shadow-blue-500/50 cursor-pointer "
+            : "")
+        }
+        onClick={() => aktivnaIkona !== id && (setAktivnaIkona(id), navigate(link))}
       >
-        <Ikona color={aktivnaIkona === id ? bojaAktivne : "white"} className="mx-auto cursor-pointer text-3xl" />
+        <Ikona color={aktivnaIkona === id ? bojaAktivne : "white"} className="mx-auto text-3xl" />
       </div>
     );
   };
