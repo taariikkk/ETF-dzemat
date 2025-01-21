@@ -26,7 +26,7 @@ const Navigacija = () => {
 
   const navigate = useNavigate();
 
-  const IkonaNavigacije = ({ id, Ikona, link }: IkonaNavigacijeType) => {
+  const IkonaNavigacije: React.FC<IkonaNavigacijeType> = ({ id, Ikona, link }) => {
     return (
       <div
         className="w-16"

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Podloga = ({ children }: { children: React.ReactNode }) => {
+const Podloga: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return <div className="">{children}</div>;
 };
 
