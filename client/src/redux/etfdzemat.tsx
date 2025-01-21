@@ -14,8 +14,6 @@ export const etfdzematSlice = createSlice({
   initialState,
   reducers: {
     setPrijavljen: (state, action: PayloadAction<boolean>) => {
-      console.log(action);
-
       state.prijavljen = action.payload;
     },
   },
