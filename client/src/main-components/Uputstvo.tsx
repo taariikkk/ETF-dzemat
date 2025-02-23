@@ -9,7 +9,7 @@ type Sekcija = {
   noviTekst: string;
 };
 
-const Uputstva = () => {
+const Uputstvo = () => {
   const [sekcije, setSekcije] = useState<Sekcija[]>([]);
   const [nazivNoveSekcije, setNazivNoveSekcije] = useState("");
 
@@ -38,15 +38,13 @@ const Uputstva = () => {
 
   const handlePromenaUnosa = (id: number, tekst: string) => {
     setSekcije((prevSekcije) =>
-      prevSekcije.map((sekcija) =>
-        sekcija.id === id ? { ...sekcija, noviTekst: tekst } : sekcija
-      )
+      prevSekcije.map((sekcija) => (sekcija.id === id ? { ...sekcija, noviTekst: tekst } : sekcija))
     );
   };
 
   return (
     <div className="p-4 bg-gray-100 min-h-screen w-[374px] mx-auto">
-      <NaslovStranice naslovStranice="Uputstva" />
+      <NaslovStranice naslovStranice="Uputstvo" />
 
       <div className="bg-white p-4 rounded shadow-md w-[339px] mx-auto mb-4">
         <div className="flex items-center text-lg font-semibold mb-2">
@@ -94,4 +92,4 @@ const Uputstva = () => {
   );
 };
 
-export default Uputstva;
+export default Uputstvo;

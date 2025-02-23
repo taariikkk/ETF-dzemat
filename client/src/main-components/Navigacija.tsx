@@ -16,7 +16,7 @@ const bojaAktivne = "rgb(50, 125, 220)";
 
 const ikone = [
   { id: 1, link: "/početna", Ikona: IoHomeOutline },
-  { id: 2, link: "/uputstva", Ikona: HiOutlineBookOpen },
+  { id: 2, link: "/uputstvo", Ikona: HiOutlineBookOpen },
   { id: 3, link: "/shopping-lista", Ikona: FiShoppingCart },
   { id: 4, link: "/donacija", Ikona: LuCreditCard },
 ];

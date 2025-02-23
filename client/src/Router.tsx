@@ -18,7 +18,7 @@ const Router = () => {
           <Route path="/registracija" element={<Registracija />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/početna" element={<Pocetna />} />
-            <Route path="/uputstva" element={<Uputstvo />} />
+            <Route path="/uputstvo" element={<Uputstvo />} />
             <Route path="/shopping-lista" element={<ShoppingLista />} />
             <Route path="/donacija" element={<Donacija />} />
           </Route>
