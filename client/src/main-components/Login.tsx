@@ -11,10 +11,8 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
   const { prijavljen } = useAppSelector((s) => s.etfszm);
 
   useEffect(() => {
@@ -44,7 +42,7 @@ const Login = () => {
             <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Šifra" />
           </form>
           {error && <p className="text-red-500">{error}</p>}
-          <div className="mt-6">
+          <div className="mt-4">
             <Dugme text="Prijavi se" onClick={handleLogin} />
           </div>
           <p className="mt-4">
