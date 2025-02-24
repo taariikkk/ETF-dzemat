@@ -10,8 +10,10 @@ const Layout = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen w-screen bg-pozadinaEkrana text-center text-4xl pt-8 pb-24 px-0">
-      <Outlet />
+    <div className="min-h-screen w-screen bg-pozadinaEkrana text-center text-4xl pt-8 pb-24">
+      <div className="max-w-96 relative mx-auto">
+        <Outlet />
+      </div>
     </div>
   );
 };

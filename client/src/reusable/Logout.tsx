@@ -8,7 +8,7 @@ const Logout = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="absolute top-10 left-4 cursor-pointer">
+    <div className="absolute top-2 left-6 cursor-pointer">
       <MdLogout
         onClick={() => {
           dispatch(setPrijavljen(false));
