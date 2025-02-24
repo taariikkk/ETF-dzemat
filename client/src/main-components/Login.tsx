@@ -8,7 +8,7 @@ import Input from "../reusable/Input";
 import Podloga from "../reusable/Podloga";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [usernameEmail, setUsernameEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -21,10 +21,10 @@ const Login = () => {
   }, []);
 
   const handleLogin = () => {
-    if (username === username && password === password) {
+    if (usernameEmail === usernameEmail && password === password) {
       dispatch(setPrijavljen(true));
       navigate("/početna");
-    } else setError("Pogrešno korisničko ime ili šifra");
+    } else setError("Pogrešni prijavni podaci");
   };
 
   return (
@@ -35,9 +35,9 @@ const Login = () => {
           <form>
             <Input
               type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Korisničko ime"
+              value={usernameEmail}
+              onChange={(e) => setUsernameEmail(e.target.value)}
+              placeholder="Korisničko ime ili email"
             />
             <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Šifra" />
           </form>
