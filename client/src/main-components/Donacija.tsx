@@ -6,8 +6,8 @@ import Podloga from "../reusable/Podloga";
 const inputPolja = [
   { type: "text", placeholder: "Ime vlasnika kartice" },
   { type: "number", placeholder: "Broj kartice" },
-  { type: "text", placeholder: "MM/YY" },
-  { type: "number", placeholder: "000" },
+  { type: "text", placeholder: "MM/YY isteka" },
+  { type: "number", placeholder: "CVC" },
 ];
 
 const Donacija = () => {
