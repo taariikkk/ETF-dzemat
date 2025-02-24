@@ -21,9 +21,14 @@ const signup = async (req: Request, res: Response) => {
 
 const login = async (req: Request, res: Response) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
-    if (!req.body.email || !req.body.password) res.status(400).json({ error: "Please enter email and password" });
-    else if (!user || !(await user.checkPassword(req.body.password)))
+    if (!req.body.usernameEmail || !req.body.password)
+      return res.status(400).json({ error: "Please enter email and password" });
+
+    let user;
+    user = await User.findOne({ username: req.body.usernameEmail });
+    if (!user) user = await User.findOne({ email: req.body.usernameEmail });
+
+    if (!user || !(await user.checkPassword(req.body.password)))
       res.status(404).json({ error: "Email and password do not match" });
     else {
       const loginToken = jwt.sign({ id: user._id, role: user.role }, config.secret);
