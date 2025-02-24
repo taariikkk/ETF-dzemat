@@ -6,6 +6,7 @@ import NaslovStranice from "../reusable/NaslovStranice";
 import Dugme from "../reusable/Dugme";
 import Input from "../reusable/Input";
 import Podloga from "../reusable/Podloga";
+import { login } from "../helper-functions/fetch-functions";
 
 const Login = () => {
   const [usernameEmail, setUsernameEmail] = useState("");
@@ -20,19 +21,30 @@ const Login = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleLogin = () => {
-    if (usernameEmail === usernameEmail && password === password) {
-      dispatch(setPrijavljen(true));
-      navigate("/početna");
-    } else setError("Pogrešni prijavni podaci");
-  };
+  function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!usernameEmail || !password) {
+      setError("Molimo popunite sva polja");
+    } else
+      login({ usernameEmail, password })
+        .then((res) => {
+          if (res && "message" in res) {
+            dispatch(setPrijavljen(true));
+            navigate("/početna");
+            // dispatch(setUsername(res.username));
+          } else setError("Pogrešni prijavni podaci");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }
 
   return (
     !prijavljen && (
       <>
         <NaslovStranice naslovStranice="Prijava" />
         <Podloga classname="bg-transparent px-0 py-0 max-w-72">
-          <form>
+          <form onSubmit={(e) => handleLogin(e)}>
             <Input
               type="text"
               value={usernameEmail}
@@ -40,11 +52,11 @@ const Login = () => {
               placeholder="Korisničko ime ili email"
             />
             <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Šifra" />
+            {error && <p className="text-red-500">{error}</p>}
+            <div className="mt-4">
+              <Dugme text="Prijavi se" type="submit" />
+            </div>
           </form>
-          {error && <p className="text-red-500">{error}</p>}
-          <div className="mt-4">
-            <Dugme text="Prijavi se" onClick={handleLogin} />
-          </div>
           <p className="mt-4">
             Nemate račun?{" "}
             <a onClick={() => navigate("/registracija")} className="underline cursor-pointer">
