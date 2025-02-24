@@ -48,11 +48,22 @@ const Login = () => {
             <Input
               type="text"
               value={usernameEmail}
-              onChange={(e) => setUsernameEmail(e.target.value)}
+              onChange={(e) => {
+                setUsernameEmail(e.target.value);
+                setError("");
+              }}
               placeholder="Korisničko ime ili email"
             />
-            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Šifra" />
-            {error && <p className="text-red-500">{error}</p>}
+            <Input
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setError("");
+              }}
+              placeholder="Šifra"
+            />
+            {error && <p className="text-red-500 leading-normal">{error}</p>}
             <div className="mt-4">
               <Dugme text="Prijavi se" type="submit" />
             </div>

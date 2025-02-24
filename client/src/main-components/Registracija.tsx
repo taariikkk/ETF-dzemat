@@ -86,7 +86,10 @@ const Registracija = () => {
                   key={i}
                   {...props}
                   value={registracija[props.valueName]}
-                  onChange={(e) => handleChange(e, props.valueName)}
+                  onChange={(e) => {
+                    handleChange(e, props.valueName);
+                    setError("");
+                  }}
                 />
               );
             })}
