@@ -15,9 +15,9 @@ const Logout = () => {
   };
 
   return (
-    <div className="absolute top-2 left-6 cursor-pointer">
+    <button className="absolute top-2 left-6 cursor-pointer">
       <MdLogout onClick={handleLogout} size={30} />
-    </div>
+    </button>
   );
 };
 
