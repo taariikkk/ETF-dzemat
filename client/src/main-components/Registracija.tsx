@@ -47,8 +47,6 @@ const Registracija = () => {
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { username, email, password, confirmPassword } = registracija;
-    console.log(username);
-
     if (Object.values(registracija).some((value) => value === "")) setError("Sva polja moraju biti popunjena");
     if (username.length < 2) setError("Korisniško ime mora imati više od dva znaka");
     else if (!validateEmailFormat(email)) setError("Neispravan email");
