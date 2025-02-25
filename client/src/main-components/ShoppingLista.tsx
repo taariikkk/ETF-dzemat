@@ -1,7 +1,8 @@
 import NaslovStranice from "../reusable/NaslovStranice";
 import { useState } from "react";
-import { FaShoppingCart, FaPlus } from "react-icons/fa";
+import { FaShoppingCart, FaPlus, FaTrashAlt } from "react-icons/fa";
 import Podloga from "../reusable/Podloga";
+import Input from "../reusable/Input";
 
 const ShoppingLista = () => {
   const [items, setItems] = useState<string[]>([]);
@@ -10,33 +11,37 @@ const ShoppingLista = () => {
 
   const handleAddItem = () => {
     if (newItem.trim() !== "") {
-      setItems([...items, newItem]);
+      setItems((s) => [...s, newItem]);
       setNewItem("");
     }
   };
 
   const handleCheck = (item: string) => {
     if (checkedItems.includes(item)) {
-      setCheckedItems(checkedItems.filter((i) => i !== item));
-      setItems([...items, item]);
+      setCheckedItems((s) => s.filter((it) => it !== item));
+      setItems((s) => [...s, item]);
     } else {
-      setCheckedItems([...checkedItems, item]);
-      setItems(items.filter((i) => i !== item));
+      setCheckedItems((s) => [...s, item]);
+      setItems((s) => s.filter((it) => it !== item));
     }
+  };
+
+  const handleDeleteItem = (itemID: number) => {
+    setCheckedItems((s) => s.filter((_, i) => i !== itemID));
   };
 
   return (
     <>
       <NaslovStranice naslovStranice={"Shopping lista"} />
       <Podloga>
-        <div className="bg-white p-4 rounded shadow-md w-[339px] h-[297px] mx-auto">
-          <div className="flex items-center text-lg font-semibold mb-2">
-            <FaShoppingCart className="mr-2" /> Korpa
-          </div>
+        <div className="bg-white p-4 rounded shadow-md min-h-48 mx-auto">
+          <h2 className="flex font-semibold items-center text-xl mb-3">
+            <FaShoppingCart className="mr-2" size={22} /> Korpa
+          </h2>
           <ul>
-            {items.map((item) => (
-              <li key={item} className="flex items-center space-x-2">
-                <input type="checkbox" onChange={() => handleCheck(item)} className="accent-blue-500" />
+            {items.map((item, i) => (
+              <li key={i} className="flex items-center space-x-2">
+                <input checked={false} type="checkbox" onChange={() => handleCheck(item)} className="accent-blue-500" />
                 <span className="text-black">{item}</span>
               </li>
             ))}
@@ -45,23 +50,26 @@ const ShoppingLista = () => {
             <button onClick={handleAddItem} className="text-blue-500 mr-2">
               <FaPlus />
             </button>
-            <input
+            <Input
               type="text"
               value={newItem}
               onChange={(e) => setNewItem(e.target.value)}
-              className="border p-1 rounded w-full"
+              className="border px-1 py-0 my-1"
               placeholder="Dodaj stavku"
             />
           </div>
         </div>
         {checkedItems.length > 0 && (
-          <div className="bg-white p-4 rounded shadow-md mt-4 w-[339px] h-[297px] mx-auto">
-            <div className="font-semibold mb-2">{checkedItems.length} označene stavke</div>
+          <div className="bg-white p-4 rounded shadow-md mt-4 min-h-48">
+            <h2 className="font-semibold text-left text-xl mb-2">Kupljene stavke ({checkedItems.length}):</h2>
             <ul>
-              {checkedItems.map((item) => (
-                <li key={item} className="flex items-center space-x-2 line-through text-gray-500">
+              {checkedItems.map((item, i) => (
+                <li key={i} className="flex items-center text-gray-500">
                   <input type="checkbox" checked onChange={() => handleCheck(item)} className="accent-blue-500" />
-                  <span className="ml-2">{item}</span>
+                  <span className="ml-2 line-through">{item}</span>
+                  <div className="ml-auto">
+                    <FaTrashAlt className="cursor-pointer ml-auto" size={17} onClick={() => handleDeleteItem(i)} />
+                  </div>
                 </li>
               ))}
             </ul>
