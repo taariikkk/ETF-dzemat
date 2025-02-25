@@ -38,7 +38,7 @@ const login = async (req: Request, res: Response) => {
           httpOnly: true,
         })
         .status(200)
-        .json({ username: user.username, message: "Logged in" });
+        .json({ username: user.username, role: user.role, message: "Logged in" });
     }
   } catch (err) {
     return res.status(500).json({ error: "Internal server error" });

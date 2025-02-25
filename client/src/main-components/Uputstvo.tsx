@@ -3,6 +3,7 @@ import NaslovStranice from "../reusable/NaslovStranice";
 import { FaPlus, FaBook } from "react-icons/fa";
 import Podloga from "../reusable/Podloga";
 import Input from "../reusable/Input";
+import { useAppSelector } from "../redux/hooks";
 
 interface Sekcija {
   id: number;
@@ -14,7 +15,7 @@ interface Sekcija {
 const uputstvo: Sekcija[] = [
   {
     id: 1,
-    naziv: "Kupovanje potrepština",
+    naziv: "Kupovina potrepština",
     stavke: [
       "Finansiranje se obavlja iz priloga naše plave kasice, online donacija i budžeta Steleksa.",
       "Za informaciju o potrebnim stvarima pogledati shopping listu i čekirati stavku nakon što je kupite.",
@@ -36,6 +37,7 @@ const uputstvo: Sekcija[] = [
 const Uputstvo = () => {
   const [sekcije, setSekcije] = useState<Sekcija[]>(uputstvo);
   const [nazivNoveSekcije, setNazivNoveSekcije] = useState("");
+  const { userInfo } = useAppSelector((s) => s.etfszm);
 
   const handleDodajSekciju = () => {
     if (nazivNoveSekcije.trim() !== "") {
@@ -45,7 +47,7 @@ const Uputstvo = () => {
         stavke: [],
         noviTekst: "",
       };
-      setSekcije([...sekcije, novaSekcija]);
+      setSekcije((s) => [...s, novaSekcija]);
       setNazivNoveSekcije("");
     }
   };
@@ -72,10 +74,10 @@ const Uputstvo = () => {
       <Podloga>
         {sekcije.map((sekcija) => (
           <div key={sekcija.id} className="bg-white p-4 rounded shadow-md mx-auto mb-4">
-            <div className="flex items-center text-lg font-semibold mb-2">
+            <div className="flex items-center gap-1 text-left text-xl font-semibold">
               <FaBook className="mr-2" /> {sekcija.naziv}
             </div>
-            <ul className="list-disc list-inside text-sm text-gray-700">
+            <ul className="list-disc list-inside text-sm text-gray-700 mt-2">
               {sekcija.stavke.map((stavka, index) => (
                 <li key={index} className="text-left my-2">
                   {stavka}
@@ -94,6 +96,11 @@ const Uputstvo = () => {
                 placeholder="Dodaj stavku"
               />
             </div> */}
+            {userInfo.role === "admin" && (
+              <div className="flex items-center text-md font-semibold cursor-pointer mt-4">
+                <FaPlus className="mr-2" /> Dodaj novu stavku
+              </div>
+            )}
           </div>
         ))}
 
