@@ -12,10 +12,10 @@ const signup = async (req, res) => {
     const user = new User(req.body);
     try {
         await user.save();
-        res.status(201).json({ message: "Successfully signed up" });
+        return res.status(201).json({ message: "Successfully signed up" });
     }
     catch (err) {
-        res.status(500).json({ error: getSaveErrorMessage(err, "user") });
+        return res.status(500).json({ error: getSaveErrorMessage(err, "user") });
     }
 };
 const login = async (req, res) => {
@@ -27,10 +27,10 @@ const login = async (req, res) => {
         if (!user)
             user = await User.findOne({ email: req.body.usernameEmail });
         if (!user || !(await user.checkPassword(req.body.password)))
-            res.status(404).json({ error: "Email and password do not match" });
+            return res.status(404).json({ error: "Email and password do not match" });
         else {
             const loginToken = jwt.sign({ id: user._id, role: user.role }, config.secret);
-            res
+            return res
                 .cookie("loginToken", loginToken, {
                 expires: new Date(Date.now() + 1000 * 60 * 60 * 72),
                 httpOnly: true,
@@ -40,7 +40,7 @@ const login = async (req, res) => {
         }
     }
     catch (err) {
-        res.status(500).json({ error: "Internal server error" });
+        return res.status(500).json({ error: "Internal server error" });
     }
 };
 const signout = (req, res) => {

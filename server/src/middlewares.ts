@@ -42,7 +42,7 @@ const validateSignUpFields = (req: Request<{}, {}, BodyObject>, res: Response, n
 
 const authenticate = async (req: AuthRequest, res: Response, next: NextFunction) => {
   jwt.verify(req.cookies.loginToken, config.secret, function (err, decoded) {
-    if (err) res.sendStatus(403);
+    if (err) return res.sendStatus(403);
     else {
       if (typeof decoded !== "string") {
         req.userId = decoded?.id;
