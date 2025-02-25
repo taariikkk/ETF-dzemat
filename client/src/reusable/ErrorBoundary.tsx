@@ -27,7 +27,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.hasError) {
       return (
         <div className="text-center flex flex-col items-center min-h-screen mt-8">
-          <h1 className="text-3xl font-bold">Oops! Nešto je pošlo po zlu.</h1>
+          <h1 className="text-3xl font-bold">Oops! Desila se neočekivana greška.</h1>
           <p className="mt-2">Pokušajte osvježiti stranicu ili se vratite nazad.</p>
           <Dugme
             className="mt-4 py-2"
