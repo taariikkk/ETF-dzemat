@@ -5,27 +5,45 @@ import { FaClock, FaUserPlus, FaUserMinus, FaCheckSquare, FaRegSquare } from "re
 
 const Pocetna = () => {
   const [aktivnosti, setAktivnosti] = useState([
-    { id: 1, naziv: "Usisavanje (jednom sedmično)", datum: "Jun 10, 2024", vrijeme: "9:41 AM", trajanje: "25min", prijavljeni: ["Tarik", "Anand"], zavrseno: false },
-    { id: 2, naziv: "Pranje serdžada (jednom sedmično)", datum: "Jun 10, 2024", vrijeme: "9:41 AM", trajanje: "25min", prijavljeni: ["Tarik", "Anand"], zavrseno: false },
+    {
+      id: 1,
+      naziv: "Usisavanje (jednom sedmično)",
+      datum: "Jun 10, 2024",
+      vrijeme: "9:41 AM",
+      trajanje: "25min",
+      prijavljeni: ["Tarik", "Anand"],
+      zavrseno: false,
+    },
+    {
+      id: 2,
+      naziv: "Pranje serdžada (jednom sedmično)",
+      datum: "Jun 10, 2024",
+      vrijeme: "9:41 AM",
+      trajanje: "25min",
+      prijavljeni: ["Tarik", "Anand"],
+      zavrseno: false,
+    },
   ]);
 
-  const username = "Anand"; // hard kodirano 
+  const username = "Anand"; // hard kodirano
 
   const chekirano = (id: number) => {
-    setAktivnosti(aktivnosti.map(a => a.id === id ? { ...a, zavrseno: !a.zavrseno } : a));
+    setAktivnosti(aktivnosti.map((a) => (a.id === id ? { ...a, zavrseno: !a.zavrseno } : a)));
   };
 
   const chekiranUser = (id: number) => {
-    setAktivnosti(aktivnosti.map(a => {
-      if (a.id === id) {
-        const jePrijavljen = a.prijavljeni.includes(username);
-        return {
-          ...a,
-          prijavljeni: jePrijavljen ? a.prijavljeni.filter(p => p !== username) : [...a.prijavljeni, username]
-        };
-      }
-      return a;
-    }));
+    setAktivnosti(
+      aktivnosti.map((a) => {
+        if (a.id === id) {
+          const jePrijavljen = a.prijavljeni.includes(username);
+          return {
+            ...a,
+            prijavljeni: jePrijavljen ? a.prijavljeni.filter((p) => p !== username) : [...a.prijavljeni, username],
+          };
+        }
+        return a;
+      })
+    );
   };
 
   return (
@@ -33,7 +51,7 @@ const Pocetna = () => {
       <NaslovStranice naslovStranice={`Dobrodošao, ${username}`} />
       <Podloga>
         {aktivnosti.map((aktivnost) => (
-          <div key={aktivnost.id} className="bg-white p-4 rounded shadow-md w-[330px] mx-auto mb-4 relative">
+          <div key={aktivnost.id} className="bg-white p-4 rounded shadow-md mx-auto mb-4 relative">
             <div className="flex justify-between items-center">
               <div className="text-sm text-gray-500">Datum i vrijeme termina</div>
               <button onClick={() => chekirano(aktivnost.id)} className="text-blue-500 text-lg">
@@ -58,7 +76,10 @@ const Pocetna = () => {
 
             <div className="text-blue-600 mt-2 text-left">{aktivnost.naziv}</div>
 
-            <button onClick={() => chekiranUser(aktivnost.id)} className="absolute bottom-5 right-4 text-blue-500 text-lg">
+            <button
+              onClick={() => chekiranUser(aktivnost.id)}
+              className="absolute bottom-5 right-4 text-blue-500 text-lg"
+            >
               {aktivnost.prijavljeni.includes(username) ? <FaUserMinus /> : <FaUserPlus />}
             </button>
           </div>
