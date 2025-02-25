@@ -14,8 +14,8 @@ const Donacija = () => {
   return (
     <>
       <NaslovStranice naslovStranice="Donacija" />
-      <Podloga>
-        <h2 className="text-left text-xl mb-4 font-semibold">Vaši podaci</h2>
+      <Podloga classname="text-4xl">
+        <h2 className="text-left text-xl mb-4 font-semibold">Podaci o kartici</h2>
         <form>
           {inputPolja.map((props, i) => {
             return <Input key={i} {...props} />;

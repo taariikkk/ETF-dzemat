@@ -33,7 +33,7 @@ const ShoppingLista = () => {
   return (
     <>
       <NaslovStranice naslovStranice={"Shopping lista"} />
-      <Podloga>
+      <Podloga classname="text-4xl">
         <div className="bg-white p-4 rounded shadow-md min-h-48 mx-auto">
           <h2 className="flex font-semibold items-center text-xl mb-3">
             <FaShoppingCart className="mr-2" size={22} /> Korpa

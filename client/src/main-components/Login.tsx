@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { setPrijavljen } from "../redux/etfdzemat";
+import { setPrijavljen, setUserInfo } from "../redux/etfdzemat";
 import NaslovStranice from "../reusable/NaslovStranice";
 import Dugme from "../reusable/Dugme";
 import Input from "../reusable/Input";
@@ -30,6 +30,7 @@ const Login = () => {
         .then((res) => {
           if (res && "message" in res) {
             dispatch(setPrijavljen(true));
+            dispatch(setUserInfo({ username: res.username, role: res.role }));
             navigate("/početna");
             // dispatch(setUsername(res.username));
           } else setError("Pogrešni prijavni podaci");
@@ -43,7 +44,7 @@ const Login = () => {
     !prijavljen && (
       <>
         <NaslovStranice naslovStranice="Prijava" />
-        <Podloga classname="bg-transparent px-0 py-0 max-w-72">
+        <Podloga classname="bg-transparent px-0 py-0 max-w-72 text-4xl">
           <form onSubmit={(e) => handleLogin(e)}>
             <Input
               type="text"
@@ -63,7 +64,7 @@ const Login = () => {
               }}
               placeholder="Šifra"
             />
-            {error && <p className="text-red-500 leading-normal">{error}</p>}
+            {error && <p className="text-red-500 leading-normal my-2">{error}</p>}
             <div className="mt-4">
               <Dugme text="Prijavi se" type="submit" />
             </div>

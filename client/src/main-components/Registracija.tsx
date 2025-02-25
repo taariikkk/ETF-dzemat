@@ -76,7 +76,7 @@ const Registracija = () => {
     !prijavljen && (
       <>
         <NaslovStranice naslovStranice="Registracija" />
-        <Podloga classname="bg-transparent px-0 py-0 max-w-72">
+        <Podloga classname="bg-transparent px-0 py-0 max-w-72 text-4xl">
           <form onSubmit={(e) => handleRegister(e)}>
             {inputPolja.map((props, i) => {
               return (
@@ -91,7 +91,7 @@ const Registracija = () => {
                 />
               );
             })}
-            {error && <p className="text-red-500 leading-normal">{error}</p>}
+            {error && <p className="text-red-500 leading-normal my-2">{error}</p>}
             <div className="mt-4">
               <Dugme text="Registruj se" type="submit" />
             </div>
