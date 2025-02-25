@@ -4,15 +4,37 @@ import { FaPlus, FaBook } from "react-icons/fa";
 import Podloga from "../reusable/Podloga";
 import Input from "../reusable/Input";
 
-type Sekcija = {
+interface Sekcija {
   id: number;
   naziv: string;
   stavke: string[];
   noviTekst: string;
-};
+}
+
+const uputstvo: Sekcija[] = [
+  {
+    id: 1,
+    naziv: "Kupovanje potrepština",
+    stavke: [
+      "Finansiranje se obavlja iz priloga naše plave kasice, online donacija i budžeta Steleksa.",
+      "Za informaciju o potrebnim stvarima pogledati shopping listu i čekirati stavku nakon što je kupite.",
+      "Račune kupovine ostavljati u plavu kasicu sa napisanim imenom i prezimenom. Administratori će ih preuzeti i predati predsjedniku Steleksa za dio refundacije.",
+    ],
+    noviTekst: "",
+  },
+  {
+    id: 2,
+    naziv: "Pranje serdžada",
+    stavke: [
+      "Poželjno petkom da se može do ponedjeljka vratiti.",
+      "Poželjno da radi neko ko ima auto jer je teško nositi.",
+    ],
+    noviTekst: "",
+  },
+];
 
 const Uputstvo = () => {
-  const [sekcije, setSekcije] = useState<Sekcija[]>([]);
+  const [sekcije, setSekcije] = useState<Sekcija[]>(uputstvo);
   const [nazivNoveSekcije, setNazivNoveSekcije] = useState("");
 
   const handleDodajSekciju = () => {
@@ -28,26 +50,53 @@ const Uputstvo = () => {
     }
   };
 
-  const handleDodajStavku = (id: number) => {
-    setSekcije((prevSekcije) =>
-      prevSekcije.map((sekcija) =>
-        sekcija.id === id && sekcija.noviTekst.trim() !== ""
-          ? { ...sekcija, stavke: [...sekcija.stavke, sekcija.noviTekst], noviTekst: "" }
-          : sekcija
-      )
-    );
-  };
+  // const handleDodajStavku = (id: number) => {
+  //   setSekcije((prevSekcije) =>
+  //     prevSekcije.map((sekcija) =>
+  //       sekcija.id === id && sekcija.noviTekst.trim() !== ""
+  //         ? { ...sekcija, stavke: [...sekcija.stavke, sekcija.noviTekst], noviTekst: "" }
+  //         : sekcija
+  //     )
+  //   );
+  // };
 
-  const handlePromenaUnosa = (id: number, tekst: string) => {
-    setSekcije((prevSekcije) =>
-      prevSekcije.map((sekcija) => (sekcija.id === id ? { ...sekcija, noviTekst: tekst } : sekcija))
-    );
-  };
+  // const handlePromenaUnosa = (id: number, tekst: string) => {
+  //   setSekcije((prevSekcije) =>
+  //     prevSekcije.map((sekcija) => (sekcija.id === id ? { ...sekcija, noviTekst: tekst } : sekcija))
+  //   );
+  // };
 
   return (
     <>
       <NaslovStranice naslovStranice="Uputstvo" />
       <Podloga>
+        {sekcije.map((sekcija) => (
+          <div key={sekcija.id} className="bg-white p-4 rounded shadow-md mx-auto mb-4">
+            <div className="flex items-center text-lg font-semibold mb-2">
+              <FaBook className="mr-2" /> {sekcija.naziv}
+            </div>
+            <ul className="list-disc list-inside text-sm text-gray-700">
+              {sekcija.stavke.map((stavka, index) => (
+                <li key={index} className="text-left my-2">
+                  {stavka}
+                </li>
+              ))}
+            </ul>
+            {/* <div className="flex items-center mt-2">
+              <button onClick={() => handleDodajStavku(sekcija.id)} className="text-blue-500 mr-2">
+                <FaPlus />
+              </button>
+              <input
+                type="text"
+                value={sekcija.noviTekst}
+                onChange={(e) => handlePromenaUnosa(sekcija.id, e.target.value)}
+                className="border p-1 rounded w-full"
+                placeholder="Dodaj stavku"
+              />
+            </div> */}
+          </div>
+        ))}
+
         <div className="bg-white p-3 rounded shadow-md mx-auto mb-4">
           <div className="flex items-center text-lg font-semibold mb-2">
             <FaPlus className="mr-2" /> Dodaj novu sekciju
@@ -65,31 +114,6 @@ const Uputstvo = () => {
             </button>
           </div>
         </div>
-
-        {sekcije.map((sekcija) => (
-          <div key={sekcija.id} className="bg-white p-4 rounded shadow-md w-[339px] mx-auto mb-4">
-            <div className="flex items-center text-lg font-semibold mb-2">
-              <FaBook className="mr-2" /> {sekcija.naziv}
-            </div>
-            <ul className="list-disc list-inside text-sm text-gray-700">
-              {sekcija.stavke.map((stavka, index) => (
-                <li key={index}>{stavka}</li>
-              ))}
-            </ul>
-            <div className="flex items-center mt-2">
-              <button onClick={() => handleDodajStavku(sekcija.id)} className="text-blue-500 mr-2">
-                <FaPlus />
-              </button>
-              <input
-                type="text"
-                value={sekcija.noviTekst}
-                onChange={(e) => handlePromenaUnosa(sekcija.id, e.target.value)}
-                className="border p-1 rounded w-full"
-                placeholder="Dodaj stavku"
-              />
-            </div>
-          </div>
-        ))}
       </Podloga>
     </>
   );
