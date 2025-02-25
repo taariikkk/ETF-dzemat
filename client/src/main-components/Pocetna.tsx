@@ -2,43 +2,78 @@ import { useState } from "react";
 import NaslovStranice from "../reusable/NaslovStranice";
 import Podloga from "../reusable/Podloga";
 import { FaClock, FaUserPlus, FaUserMinus, FaCheckSquare, FaRegSquare } from "react-icons/fa";
+import { useAppSelector } from "../redux/hooks";
 
 const Pocetna = () => {
+  const { userInfo } = useAppSelector((s) => s.etfszm);
+
   const [aktivnosti, setAktivnosti] = useState([
     {
       id: 1,
-      naziv: "Usisavanje (jednom sedmično)",
-      datum: "Jun 10, 2024",
-      vrijeme: "9:41 AM",
-      trajanje: "25min",
+      naziv: "Usisavanje",
+      termini: [
+        { dan: "utorak", vrijeme: "11:00", zavrseno: true },
+        { dan: "četvrtak", vrijeme: "11:00", zavrseno: false },
+      ],
+      trajanje: "25 min",
       prijavljeni: ["Tarik", "Anand"],
       zavrseno: false,
     },
     {
       id: 2,
-      naziv: "Pranje serdžada (jednom sedmično)",
-      datum: "Jun 10, 2024",
-      vrijeme: "9:41 AM",
-      trajanje: "25min",
-      prijavljeni: ["Tarik", "Anand"],
+      naziv: "Pranje serdžada",
+      termini: [{ dan: "petak", vrijeme: "19:00", zavrseno: false }],
+      trajanje: "1h",
+      prijavljeni: ["Amina", "Selma"],
+      zavrseno: false,
+    },
+    {
+      id: 3,
+      naziv: "Čišćenje abdesthane/toaleta",
+      termini: [
+        { dan: "ponedjeljak", vrijeme: "09:00", zavrseno: true },
+        { dan: "srijeda", vrijeme: "11:00", zavrseno: false },
+        { dan: "petak", vrijeme: "10:00", zavrseno: false },
+      ],
+      trajanje: "45 min - 1h",
+      prijavljeni: ["Tarik", "Anand", "Bilal", "Mirza", "admin"],
       zavrseno: false,
     },
   ]);
 
-  const username = "Anand"; // hard kodirano
+  const motivacionePoruke = [
+    { text: '"I činite dobro - Allah, zaista, voli one koji dobra djela čine."', izvor: "📖 (Kur'an, El-Bekara, 195)" },
+    {
+      text: '"Najbolji među vama su oni koji su najkorisniji ljudima."',
+      izvor: "📜 (Hadis bilježi Taberani)",
+    },
+  ];
 
-  const chekirano = (id: number) => {
-    setAktivnosti(aktivnosti.map((a) => (a.id === id ? { ...a, zavrseno: !a.zavrseno } : a)));
+  const chekirano = (i: number, j: number) => {
+    setAktivnosti((s) =>
+      s.map((aktivnost, index1) =>
+        i === index1
+          ? {
+              ...aktivnost,
+              termini: aktivnost.termini.map((termin, index2) =>
+                j === index2 ? { ...termin, zavrseno: !termin.zavrseno } : termin
+              ),
+            }
+          : aktivnost
+      )
+    );
   };
 
-  const chekiranUser = (id: number) => {
-    setAktivnosti(
-      aktivnosti.map((a) => {
-        if (a.id === id) {
-          const jePrijavljen = a.prijavljeni.includes(username);
+  const chekiranUser = (i: number) => {
+    setAktivnosti((s) =>
+      s.map((a, index) => {
+        if (index === i) {
           return {
             ...a,
-            prijavljeni: jePrijavljen ? a.prijavljeni.filter((p) => p !== username) : [...a.prijavljeni, username],
+            prijavljeni:
+              userInfo.username && a.prijavljeni.includes(userInfo.username)
+                ? a.prijavljeni.filter((p) => p !== userInfo.username)
+                : [...a.prijavljeni, userInfo.username || ""],
           };
         }
         return a;
@@ -46,42 +81,66 @@ const Pocetna = () => {
     );
   };
 
+  const brPoruke = Math.floor(Math.random() * motivacionePoruke.length);
+
   return (
     <>
-      <NaslovStranice naslovStranice={`Dobrodošao, ${username}`} />
+      <NaslovStranice naslovStranice={`Dobrodošao ${userInfo.username}`} />
       <Podloga>
-        {aktivnosti.map((aktivnost) => (
-          <div key={aktivnost.id} className="bg-white p-4 rounded shadow-md mx-auto mb-4 relative">
-            <div className="flex justify-between items-center">
-              <div className="text-sm text-gray-500">Datum i vrijeme termina</div>
-              <button onClick={() => chekirano(aktivnost.id)} className="text-blue-500 text-lg">
-                {aktivnost.zavrseno ? <FaCheckSquare /> : <FaRegSquare />}
+        <p className="mb-2 text-lg">{motivacionePoruke[brPoruke].text}</p>
+        <p className="text-sm">{motivacionePoruke[brPoruke].izvor}</p>
+      </Podloga>
+      <Podloga>
+        <h2 className="text-3xl mb-6">
+          Preglednik
+          <br />
+          aktivnosti
+        </h2>
+        {aktivnosti.map((aktivnost, i) => (
+          <div key={i} className="bg-white p-4 rounded shadow-md mx-auto mb-4 relative">
+            <h3 className="text-left text-xl font-semibold">{aktivnost.naziv}</h3>
+
+            <div className="flex justify-between items-center mt-4">
+              <span className="text-sm text-gray-500">
+                Dan i vrijeme
+                <br /> aktivnosti
+              </span>
+              <span className="text-sm text-gray-500">Obavljeno</span>
+            </div>
+
+            <div className="flex flex-col gap-2 mt-2">
+              {aktivnost.termini.map((termin, j) => (
+                <div key={j} className="flex justify-between items-center">
+                  <span key={j} className="bg-blue-100 text-blue-600 rounded text-left px-2 py-2 w-36">
+                    {termin.dan}, {termin.vrijeme}
+                  </span>
+                  <button onClick={() => chekirano(i, j)} className="text-blue-500">
+                    {termin.zavrseno ? <FaCheckSquare /> : <FaRegSquare />}
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex justify-between mt-4">
+              <div className="flex items-center">
+                <FaClock className="text-gray-500 mr-1" />
+                <span className="text-gray-700">Trajanje: {aktivnost.trajanje}</span>
+              </div>
+            </div>
+
+            <div className="flex text-left mt-4">
+              <span className="text-sm text-gray-700">
+                <strong className="text-sm text-gray-700">Prijavljeni: </strong>
+                {aktivnost.prijavljeni.join(", ")}
+              </span>
+              <button onClick={() => chekiranUser(i)} className="text-blue-500 p-1 ml-auto">
+                {userInfo.username && aktivnost.prijavljeni.includes(userInfo.username) ? (
+                  <FaUserMinus />
+                ) : (
+                  <FaUserPlus />
+                )}
               </button>
             </div>
-
-            <div className="flex items-center space-x-2 mt-1">
-              <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded">{aktivnost.datum}</span>
-              <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded">{aktivnost.vrijeme}</span>
-            </div>
-
-            <div className="mt-2 text-left">
-              <strong className="text-sm text-gray-700">Prijavljeni:</strong>
-              <span className="text-sm text-gray-700 ml-2">{aktivnost.prijavljeni.join(", ")}</span>
-            </div>
-
-            <div className="flex items-center mt-2">
-              <FaClock className="text-gray-500 mr-1" />
-              <span className="text-gray-700">{aktivnost.trajanje}</span>
-            </div>
-
-            <div className="text-blue-600 mt-2 text-left">{aktivnost.naziv}</div>
-
-            <button
-              onClick={() => chekiranUser(aktivnost.id)}
-              className="absolute bottom-5 right-4 text-blue-500 text-lg"
-            >
-              {aktivnost.prijavljeni.includes(username) ? <FaUserMinus /> : <FaUserPlus />}
-            </button>
           </div>
         ))}
       </Podloga>
