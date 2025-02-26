@@ -8,6 +8,7 @@ interface AxiosMessage {
 }
 interface LoginMessage extends AxiosMessage {
   username: string;
+  role: "admin" | "basic_user";
 }
 export interface Prijava {
   usernameEmail: string | undefined;

@@ -36,7 +36,7 @@ const login = async (req, res) => {
                 httpOnly: true,
             })
                 .status(200)
-                .json({ username: user.username, message: "Logged in" });
+                .json({ username: user.username, role: user.role, message: "Logged in" });
         }
     }
     catch (err) {

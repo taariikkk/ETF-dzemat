@@ -9,7 +9,7 @@ interface InputProps {
 }
 
 const Input: React.FC<InputProps> = ({ className, ...props }) => {
-  return <input className={twMerge("rounded-md px-2 py-1 my-2 w-full", className)} {...props} />;
+  return <input className={twMerge("rounded-md px-2 py-3 my-2 w-full", className)} {...props} />;
 };
 
 export default Input;
