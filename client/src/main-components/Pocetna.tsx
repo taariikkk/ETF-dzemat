@@ -4,13 +4,10 @@ import { FaClock, FaUserPlus, FaUserMinus, FaCheckSquare, FaRegSquare } from "re
 import { pocetneAktivnosti, motivacionePoruke } from "../data/pocetniPodaci";
 import NaslovStranice from "../reusable/NaslovStranice";
 import Logout from "../reusable/Logout";
-import Info from "../reusable/Info";
-import Modal from "../reusable/Modal";
 import Podloga from "../reusable/Podloga";
 
 const Pocetna = () => {
   const [aktivnosti, setAktivnosti] = useState(pocetneAktivnosti);
-  const [openModal, setOpenModal] = useState(false);
   const { userInfo } = useAppSelector((s) => s.etfszm);
 
   const brPoruke = useMemo(() => {
@@ -49,24 +46,10 @@ const Pocetna = () => {
     );
   };
 
-  const handleModalOpen = () => {
-    setOpenModal(true);
-    document.body.classList.add("overflow-hidden");
-  };
-
-  const handleModalClose = () => {
-    setOpenModal(false);
-    document.body.classList.remove("overflow-hidden");
-  };
-
   return (
     <>
       <NaslovStranice naslovStranice={`Dobrodošao ${userInfo.username}`} />
       <Logout />
-      <Info onClick={handleModalOpen} />
-      <Modal headerTitle="početna" openModal={openModal} closeModal={handleModalClose}>
-        <div>Sadrzaj modala</div>
-      </Modal>
       <Podloga>
         <p className="mb-2 text-lg">{motivacionePoruke[brPoruke].text}</p>
         <p className="text-sm">{motivacionePoruke[brPoruke].izvor}</p>

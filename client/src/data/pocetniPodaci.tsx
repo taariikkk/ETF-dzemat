@@ -73,11 +73,13 @@ export const uputstvo = [
 ];
 
 export const shoppingListaStavke = [
-  { naziv: "Trulex", checked: false },
-  { naziv: "Otirač", checked: false },
+  { naziv: "Otirač za cipele", checked: false },
+  { naziv: "Slatkiši za posjetioce", checked: false },
   { naziv: "Ubrusi", checked: false },
+  { naziv: "Trulex", checked: false },
   { naziv: "Četka za pod", checked: true },
   { naziv: "Konvektor", checked: true },
+  { naziv: "Usisivač", checked: true },
 ];
 
 export const donacijaInputPolja = [
@@ -85,6 +87,7 @@ export const donacijaInputPolja = [
   { type: "number", placeholder: "Broj kartice" },
   { type: "text", placeholder: "MM/YY isteka" },
   { type: "number", placeholder: "CVC" },
+  { type: "number", placeholder: "Iznos" },
 ];
 
 export const registracijaInputPolja = [
@@ -95,3 +98,18 @@ export const registracijaInputPolja = [
 ];
 
 export const registracijaKeys = ["username", "email", "password", "confirmPassword"];
+
+export const svrheDonacije = [
+  "Kupovina stavki sa shopping liste",
+  "Novčana nagrada za volontere",
+  "Za rezervu i buduće aktivnosti",
+  "Ništa od navedenog",
+];
+
+export const historijaDonacija = [
+  { iznos: "15.00", datum: "26/02/2025 20:36", svrha: "Kupovina stavki sa shopping liste" },
+  { iznos: "35.00", datum: "23/02/2025 15:15", svrha: "Kupovina stavki sa shopping liste" },
+  { iznos: "150.00", datum: "22/02/2025 21:57", svrha: "Za plaćanje majstora za postavljanje vrata" },
+  { iznos: "50.00", datum: "15/02/2025 08:43", svrha: "Za rezervu i buduće aktivnosti" },
+  { iznos: "300.00", datum: "01/01/2025 12:07", svrha: "Novčana nagrada za volontere" },
+];
