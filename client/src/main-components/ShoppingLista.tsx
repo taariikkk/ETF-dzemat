@@ -4,15 +4,12 @@ import { FaShoppingCart, FaPlus, FaTrashAlt } from "react-icons/fa";
 import { shoppingListaStavke } from "../data/pocetniPodaci";
 import NaslovStranice from "../reusable/NaslovStranice";
 import Logout from "../reusable/Logout";
-import Info from "../reusable/Info";
-import Modal from "../reusable/Modal";
 import Podloga from "../reusable/Podloga";
 import Input from "../reusable/Input";
 
 const ShoppingLista = () => {
   const [items, setItems] = useState(shoppingListaStavke);
   const [newItem, setNewItem] = useState("");
-  const [openModal, setOpenModal] = useState(false);
   const { userInfo } = useAppSelector((s) => s.etfszm);
 
   const handleAddItem = () => {
@@ -30,24 +27,10 @@ const ShoppingLista = () => {
     setItems((s) => s.filter((_, i) => i !== itemID));
   };
 
-  const handleModalOpen = () => {
-    setOpenModal(true);
-    document.body.classList.add("overflow-hidden");
-  };
-
-  const handleModalClose = () => {
-    setOpenModal(false);
-    document.body.classList.remove("overflow-hidden");
-  };
-
   return (
     <>
       <NaslovStranice naslovStranice={"Shopping lista"} />
       <Logout />
-      <Info onClick={handleModalOpen} />
-      <Modal headerTitle="shopping lista" openModal={openModal} closeModal={handleModalClose}>
-        <div>Sadrzaj modala</div>
-      </Modal>
       <Podloga>
         <div className="bg-white p-4 rounded shadow-md min-h-48 mx-auto">
           <h2 className="flex font-semibold items-center text-xl mb-3">
@@ -57,12 +40,12 @@ const ShoppingLista = () => {
             {items.map(
               (item, i) =>
                 !item.checked && (
-                  <li key={i} className="flex items-center space-x-2 mt-1">
+                  <li key={i} className="flex items-center space-x-2 mt-2">
                     <input
                       checked={item.checked}
                       type="checkbox"
                       onChange={() => handleCheck(i)}
-                      className="accent-blue-500"
+                      className="w-3.5 h-3.5 accent-blue-500 cursor-pointer"
                     />
                     <span className="text-black">{item.naziv}</span>
                   </li>
@@ -91,8 +74,13 @@ const ShoppingLista = () => {
               {items.map(
                 (item, i) =>
                   item.checked && (
-                    <li key={i} className="flex items-center text-gray-500 mt-1">
-                      <input type="checkbox" checked onChange={() => handleCheck(i)} className="accent-blue-500" />
+                    <li key={i} className="flex items-center text-gray-500 mt-2">
+                      <input
+                        type="checkbox"
+                        checked
+                        onChange={() => handleCheck(i)}
+                        className="w-3.5 h-3.5 accent-blue-500 cursor-pointer"
+                      />
                       <span className="ml-2 line-through">{item.naziv}</span>
                       {userInfo.role === "admin" && (
                         <div className="ml-auto">
