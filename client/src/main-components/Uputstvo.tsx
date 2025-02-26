@@ -52,21 +52,19 @@ const Uputstvo = () => {
     }
   };
 
-  // const handleDodajStavku = (id: number) => {
-  //   setSekcije((prevSekcije) =>
-  //     prevSekcije.map((sekcija) =>
-  //       sekcija.id === id && sekcija.noviTekst.trim() !== ""
-  //         ? { ...sekcija, stavke: [...sekcija.stavke, sekcija.noviTekst], noviTekst: "" }
-  //         : sekcija
-  //     )
-  //   );
-  // };
+  const handleDodajStavku = (id: number) => {
+    setSekcije((s) =>
+      s.map((sekcija) =>
+        sekcija.id === id && sekcija.noviTekst.trim() !== ""
+          ? { ...sekcija, stavke: [...sekcija.stavke, sekcija.noviTekst], noviTekst: "" }
+          : sekcija
+      )
+    );
+  };
 
-  // const handlePromenaUnosa = (id: number, tekst: string) => {
-  //   setSekcije((prevSekcije) =>
-  //     prevSekcije.map((sekcija) => (sekcija.id === id ? { ...sekcija, noviTekst: tekst } : sekcija))
-  //   );
-  // };
+  const handlePromenaUnosa = (id: number, tekst: string) => {
+    setSekcije((s) => s.map((sekcija) => (sekcija.id === id ? { ...sekcija, noviTekst: tekst } : sekcija)));
+  };
 
   return (
     <>
@@ -77,50 +75,51 @@ const Uputstvo = () => {
             <div className="flex items-center gap-1 text-left text-xl font-semibold">
               <FaBook className="mr-2" /> {sekcija.naziv}
             </div>
-            <ul className="list-disc list-inside text-sm text-gray-700 mt-2">
+
+            <ul className="list-disc list-inside text-sm text-gray-700 mt-4">
               {sekcija.stavke.map((stavka, index) => (
-                <li key={index} className="text-left my-2">
+                <li key={index} className="text-left mt-2">
                   {stavka}
                 </li>
               ))}
             </ul>
-            {/* <div className="flex items-center mt-2">
-              <button onClick={() => handleDodajStavku(sekcija.id)} className="text-blue-500 mr-2">
-                <FaPlus />
-              </button>
-              <input
-                type="text"
-                value={sekcija.noviTekst}
-                onChange={(e) => handlePromenaUnosa(sekcija.id, e.target.value)}
-                className="border p-1 rounded w-full"
-                placeholder="Dodaj stavku"
-              />
-            </div> */}
+
             {userInfo.role === "admin" && (
-              <div className="flex items-center text-md font-semibold cursor-pointer mt-4">
-                <FaPlus className="mr-2" /> Dodaj novu stavku
+              <div className="flex items-center mt-4">
+                <Input
+                  type="text"
+                  value={sekcija.noviTekst}
+                  onChange={(e) => handlePromenaUnosa(sekcija.id, e.target.value)}
+                  className="border py-2 my-1"
+                  placeholder="Dodaj stavku"
+                />
+                <button onClick={() => handleDodajStavku(sekcija.id)} className="text-blue-500 ml-2">
+                  <FaPlus />
+                </button>
               </div>
             )}
           </div>
         ))}
 
-        <div className="bg-white p-3 rounded shadow-md mx-auto mb-4">
-          <div className="flex items-center text-lg font-semibold mb-2">
-            <FaPlus className="mr-2" /> Dodaj novu sekciju
+        {userInfo.role === "admin" && (
+          <div className="bg-white p-4 rounded shadow-md mx-auto mt-8">
+            <div className="flex items-center text-lg font-semibold mb-2">
+              <FaPlus className="mr-2" /> Dodaj novu sekciju
+            </div>
+            <div className="flex items-center mt-2">
+              <Input
+                type="text"
+                value={nazivNoveSekcije}
+                onChange={(e) => setNazivNoveSekcije(e.target.value)}
+                className="border py-2 my-2"
+                placeholder="Unesite naziv sekcije"
+              />
+              <button onClick={handleDodajSekciju} className="text-blue-500 ml-2">
+                <FaPlus />
+              </button>
+            </div>
           </div>
-          <div className="flex items-center mt-2">
-            <Input
-              type="text"
-              value={nazivNoveSekcije}
-              onChange={(e) => setNazivNoveSekcije(e.target.value)}
-              className="border"
-              placeholder="Unesite naziv sekcije"
-            />
-            <button onClick={handleDodajSekciju} className="text-blue-500 ml-2">
-              <FaPlus />
-            </button>
-          </div>
-        </div>
+        )}
       </Podloga>
     </>
   );
