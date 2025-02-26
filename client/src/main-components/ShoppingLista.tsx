@@ -1,9 +1,12 @@
-import NaslovStranice from "../reusable/NaslovStranice";
 import { useState } from "react";
+import { useAppSelector } from "../redux/hooks";
 import { FaShoppingCart, FaPlus, FaTrashAlt } from "react-icons/fa";
+import NaslovStranice from "../reusable/NaslovStranice";
+import Logout from "../reusable/Logout";
+import Info from "../reusable/Info";
+import Modal from "../reusable/Modal";
 import Podloga from "../reusable/Podloga";
 import Input from "../reusable/Input";
-import { useAppSelector } from "../redux/hooks";
 
 const shoppingListItems = [
   { naziv: "Trulex", checked: false },
@@ -16,6 +19,7 @@ const shoppingListItems = [
 const ShoppingLista = () => {
   const [items, setItems] = useState(shoppingListItems);
   const [newItem, setNewItem] = useState("");
+  const [openModal, setOpenModal] = useState(false);
   const { userInfo } = useAppSelector((s) => s.etfszm);
 
   const handleAddItem = () => {
@@ -33,9 +37,24 @@ const ShoppingLista = () => {
     setItems((s) => s.filter((_, i) => i !== itemID));
   };
 
+  const handleModalOpen = () => {
+    setOpenModal(true);
+    document.body.classList.add("overflow-hidden");
+  };
+
+  const handleModalClose = () => {
+    setOpenModal(false);
+    document.body.classList.remove("overflow-hidden");
+  };
+
   return (
     <>
       <NaslovStranice naslovStranice={"Shopping lista"} />
+      <Logout />
+      <Info onClick={handleModalOpen} />
+      <Modal headerTitle="shopping lista" openModal={openModal} closeModal={handleModalClose}>
+        <div>Sadrzaj modala</div>
+      </Modal>
       <Podloga>
         <div className="bg-white p-4 rounded shadow-md min-h-48 mx-auto">
           <h2 className="flex font-semibold items-center text-xl mb-3">

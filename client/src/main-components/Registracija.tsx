@@ -9,11 +9,13 @@ import { signup } from "../helper-functions/fetch-functions";
 import { getErrorMessage } from "../helper-functions/error-functions";
 
 const inputPolja = [
-  { type: "text", placeholder: "Korisničko ime", valueName: "username" },
-  { type: "text", placeholder: "Email", valueName: "email" },
-  { type: "password", placeholder: "Šifra", valueName: "password" },
-  { type: "password", placeholder: "Potvrdite šifru", valueName: "confirmPassword" },
+  { type: "text", placeholder: "Korisničko ime" },
+  { type: "text", placeholder: "Email" },
+  { type: "password", placeholder: "Šifra" },
+  { type: "password", placeholder: "Potvrdite šifru" },
 ];
+
+const registracijaKeys = ["username", "email", "password", "confirmPassword"];
 
 export interface Registracija {
   [key: string]: string;
@@ -65,10 +67,10 @@ const Registracija = () => {
         });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, valueName: string) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, value: string) => {
     setRegistracija((s) => ({
       ...s,
-      [valueName]: e.target.value,
+      [value]: e.target.value,
     }));
   };
 
@@ -83,9 +85,9 @@ const Registracija = () => {
                 <Input
                   key={i}
                   {...props}
-                  value={registracija[props.valueName]}
+                  value={registracija[registracijaKeys[i]]}
                   onChange={(e) => {
-                    handleChange(e, props.valueName);
+                    handleChange(e, registracijaKeys[i]);
                     setError("");
                   }}
                 />

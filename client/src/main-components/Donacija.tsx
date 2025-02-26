@@ -1,7 +1,11 @@
+import { useState } from "react";
+import NaslovStranice from "../reusable/NaslovStranice";
+import Logout from "../reusable/Logout";
+import Info from "../reusable/Info";
+import Modal from "../reusable/Modal";
+import Podloga from "../reusable/Podloga";
 import Dugme from "../reusable/Dugme";
 import Input from "../reusable/Input";
-import NaslovStranice from "../reusable/NaslovStranice";
-import Podloga from "../reusable/Podloga";
 
 const inputPolja = [
   { type: "text", placeholder: "Ime vlasnika kartice" },
@@ -11,9 +15,26 @@ const inputPolja = [
 ];
 
 const Donacija = () => {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleModalOpen = () => {
+    setOpenModal(true);
+    document.body.classList.add("overflow-hidden");
+  };
+
+  const handleModalClose = () => {
+    setOpenModal(false);
+    document.body.classList.remove("overflow-hidden");
+  };
+
   return (
     <>
       <NaslovStranice naslovStranice="Donacija" />
+      <Logout />
+      <Info onClick={handleModalOpen} />
+      <Modal headerTitle="donacija" openModal={openModal} closeModal={handleModalClose}>
+        <div>Sadrzaj modala</div>
+      </Modal>
       <Podloga>
         <h2 className="text-left text-xl mb-4 font-semibold">Podaci o kartici</h2>
         <form>

@@ -1,9 +1,12 @@
 import { useState } from "react";
-import NaslovStranice from "../reusable/NaslovStranice";
+import { useAppSelector } from "../redux/hooks";
 import { FaPlus, FaBook } from "react-icons/fa";
+import NaslovStranice from "../reusable/NaslovStranice";
+import Logout from "../reusable/Logout";
+import Info from "../reusable/Info";
+import Modal from "../reusable/Modal";
 import Podloga from "../reusable/Podloga";
 import Input from "../reusable/Input";
-import { useAppSelector } from "../redux/hooks";
 
 interface Sekcija {
   id: number;
@@ -37,6 +40,7 @@ const uputstvo: Sekcija[] = [
 const Uputstvo = () => {
   const [sekcije, setSekcije] = useState<Sekcija[]>(uputstvo);
   const [nazivNoveSekcije, setNazivNoveSekcije] = useState("");
+  const [openModal, setOpenModal] = useState(false);
   const { userInfo } = useAppSelector((s) => s.etfszm);
 
   const handleDodajSekciju = () => {
@@ -62,13 +66,28 @@ const Uputstvo = () => {
     );
   };
 
-  const handlePromenaUnosa = (id: number, tekst: string) => {
+  const handlePromjenaUnosa = (id: number, tekst: string) => {
     setSekcije((s) => s.map((sekcija) => (sekcija.id === id ? { ...sekcija, noviTekst: tekst } : sekcija)));
+  };
+
+  const handleModalOpen = () => {
+    setOpenModal(true);
+    document.body.classList.add("overflow-hidden");
+  };
+
+  const handleModalClose = () => {
+    setOpenModal(false);
+    document.body.classList.remove("overflow-hidden");
   };
 
   return (
     <>
       <NaslovStranice naslovStranice="Uputstvo" />
+      <Logout />
+      <Info onClick={handleModalOpen} />
+      <Modal headerTitle="uputstvo" openModal={openModal} closeModal={handleModalClose}>
+        <div>Sadrzaj modala</div>
+      </Modal>
       <Podloga>
         {sekcije.map((sekcija) => (
           <div key={sekcija.id} className="bg-white p-4 rounded shadow-md mx-auto mb-4">
@@ -89,7 +108,7 @@ const Uputstvo = () => {
                 <Input
                   type="text"
                   value={sekcija.noviTekst}
-                  onChange={(e) => handlePromenaUnosa(sekcija.id, e.target.value)}
+                  onChange={(e) => handlePromjenaUnosa(sekcija.id, e.target.value)}
                   className="border py-2 my-1"
                   placeholder="Dodaj stavku"
                 />

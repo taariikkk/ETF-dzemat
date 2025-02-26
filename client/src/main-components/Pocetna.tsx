@@ -1,12 +1,13 @@
 import { useState } from "react";
-import NaslovStranice from "../reusable/NaslovStranice";
-import Podloga from "../reusable/Podloga";
-import { FaClock, FaUserPlus, FaUserMinus, FaCheckSquare, FaRegSquare } from "react-icons/fa";
 import { useAppSelector } from "../redux/hooks";
+import { FaClock, FaUserPlus, FaUserMinus, FaCheckSquare, FaRegSquare } from "react-icons/fa";
+import NaslovStranice from "../reusable/NaslovStranice";
+import Logout from "../reusable/Logout";
+import Info from "../reusable/Info";
+import Modal from "../reusable/Modal";
+import Podloga from "../reusable/Podloga";
 
 const Pocetna = () => {
-  const { userInfo } = useAppSelector((s) => s.etfszm);
-
   const [aktivnosti, setAktivnosti] = useState([
     {
       id: 1,
@@ -40,6 +41,9 @@ const Pocetna = () => {
       zavrseno: false,
     },
   ]);
+  const [openModal, setOpenModal] = useState(false);
+
+  const { userInfo } = useAppSelector((s) => s.etfszm);
 
   const motivacionePoruke = [
     { text: '"I činite dobro - Allah, zaista, voli one koji dobra djela čine."', izvor: "📖 (Kur'an, El-Bekara, 195)" },
@@ -81,11 +85,26 @@ const Pocetna = () => {
     );
   };
 
+  const handleModalOpen = () => {
+    setOpenModal(true);
+    document.body.classList.add("overflow-hidden");
+  };
+
+  const handleModalClose = () => {
+    setOpenModal(false);
+    document.body.classList.remove("overflow-hidden");
+  };
+
   const brPoruke = Math.floor(Math.random() * motivacionePoruke.length);
 
   return (
     <>
       <NaslovStranice naslovStranice={`Dobrodošao ${userInfo.username}`} />
+      <Logout />
+      <Info onClick={handleModalOpen} />
+      <Modal headerTitle="početna" openModal={openModal} closeModal={handleModalClose}>
+        <div>Sadrzaj modala</div>
+      </Modal>
       <Podloga>
         <p className="mb-2 text-lg">{motivacionePoruke[brPoruke].text}</p>
         <p className="text-sm">{motivacionePoruke[brPoruke].izvor}</p>
@@ -111,7 +130,7 @@ const Pocetna = () => {
             <div className="flex flex-col gap-2 mt-2">
               {aktivnost.termini.map((termin, j) => (
                 <div key={j} className="flex justify-between items-center">
-                  <span key={j} className="bg-blue-100 text-blue-600 rounded text-left px-2 py-2 w-36">
+                  <span key={j} className="bg-blue-100 text-blue-700 rounded text-left px-2 py-2 w-36">
                     {termin.dan}, {termin.vrijeme}
                   </span>
                   <button onClick={() => chekirano(i, j)} className="text-blue-500">
