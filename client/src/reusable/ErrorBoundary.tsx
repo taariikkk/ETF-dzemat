@@ -28,17 +28,20 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       return (
         <div className="text-center flex flex-col items-center min-h-screen mt-8">
           <h1 className="text-3xl font-bold">Oops! Desila se neočekivana greška.</h1>
-          <p className="mt-2">Pokušajte osvježiti stranicu ili se vratite nazad.</p>
-          <Dugme
-            className="mt-4 py-2"
-            text="Nazad"
-            onClick={() => {
-              window.history.back();
-              setTimeout(() => {
-                window.location.reload();
-              }, 100);
-            }}
-          />
+          <p className="mt-2">Vratite se nazad ili pokušajte osvježiti stranicu.</p>
+          <div className="flex gap-4">
+            <Dugme
+              className="mt-4 py-2"
+              text="Nazad"
+              onClick={() => {
+                window.history.back();
+                setTimeout(() => {
+                  window.location.reload();
+                }, 100);
+              }}
+            />
+            <Dugme className="mt-4 py-2" text="Osvježi" onClick={() => window.location.reload()} />
+          </div>
         </div>
       );
     }
