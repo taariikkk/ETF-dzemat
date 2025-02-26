@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppSelector } from "../redux/hooks";
 import { FaShoppingCart, FaPlus, FaTrashAlt } from "react-icons/fa";
+import { shoppingListaStavke } from "../data/pocetniPodaci";
 import NaslovStranice from "../reusable/NaslovStranice";
 import Logout from "../reusable/Logout";
 import Info from "../reusable/Info";
@@ -8,16 +9,8 @@ import Modal from "../reusable/Modal";
 import Podloga from "../reusable/Podloga";
 import Input from "../reusable/Input";
 
-const shoppingListItems = [
-  { naziv: "Trulex", checked: false },
-  { naziv: "Otirač", checked: false },
-  { naziv: "Ubrusi", checked: false },
-  { naziv: "Četka za pod", checked: true },
-  { naziv: "Konvektor", checked: true },
-];
-
 const ShoppingLista = () => {
-  const [items, setItems] = useState(shoppingListItems);
+  const [items, setItems] = useState(shoppingListaStavke);
   const [newItem, setNewItem] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const { userInfo } = useAppSelector((s) => s.etfszm);

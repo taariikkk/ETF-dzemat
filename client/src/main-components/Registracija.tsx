@@ -1,21 +1,13 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
 import { useAppSelector } from "../redux/hooks";
+import { useNavigate } from "react-router";
+import { registracijaInputPolja, registracijaKeys } from "../data/pocetniPodaci";
 import NaslovStranice from "../reusable/NaslovStranice";
+import Podloga from "../reusable/Podloga";
 import Dugme from "../reusable/Dugme";
 import Input from "../reusable/Input";
-import Podloga from "../reusable/Podloga";
 import { signup } from "../helper-functions/fetch-functions";
 import { getErrorMessage } from "../helper-functions/error-functions";
-
-const inputPolja = [
-  { type: "text", placeholder: "Korisničko ime" },
-  { type: "text", placeholder: "Email" },
-  { type: "password", placeholder: "Šifra" },
-  { type: "password", placeholder: "Potvrdite šifru" },
-];
-
-const registracijaKeys = ["username", "email", "password", "confirmPassword"];
 
 export interface Registracija {
   [key: string]: string;
@@ -80,7 +72,7 @@ const Registracija = () => {
         <NaslovStranice naslovStranice="Registracija" />
         <Podloga classname="bg-transparent px-0 py-0 max-w-72">
           <form onSubmit={(e) => handleRegister(e)}>
-            {inputPolja.map((props, i) => {
+            {registracijaInputPolja.map((props, i) => {
               return (
                 <Input
                   key={i}

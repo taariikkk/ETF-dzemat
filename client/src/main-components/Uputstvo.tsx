@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppSelector } from "../redux/hooks";
 import { FaPlus, FaBook } from "react-icons/fa";
+import { uputstvo } from "../data/pocetniPodaci";
 import NaslovStranice from "../reusable/NaslovStranice";
 import Logout from "../reusable/Logout";
 import Info from "../reusable/Info";
@@ -14,28 +15,6 @@ interface Sekcija {
   stavke: string[];
   noviTekst: string;
 }
-
-const uputstvo: Sekcija[] = [
-  {
-    id: 1,
-    naziv: "Kupovina potrepština",
-    stavke: [
-      "Finansiranje se obavlja iz priloga naše plave kasice, online donacija i budžeta Steleksa.",
-      "Za informaciju o potrebnim stvarima pogledati shopping listu i čekirati stavku nakon što je kupite.",
-      "Račune kupovine ostavljati u plavu kasicu sa napisanim imenom i prezimenom. Administratori će ih preuzeti i predati predsjedniku Steleksa za dio refundacije.",
-    ],
-    noviTekst: "",
-  },
-  {
-    id: 2,
-    naziv: "Pranje serdžada",
-    stavke: [
-      "Poželjno petkom da se može do ponedjeljka vratiti.",
-      "Poželjno da radi neko ko ima auto jer je teško nositi.",
-    ],
-    noviTekst: "",
-  },
-];
 
 const Uputstvo = () => {
   const [sekcije, setSekcije] = useState<Sekcija[]>(uputstvo);

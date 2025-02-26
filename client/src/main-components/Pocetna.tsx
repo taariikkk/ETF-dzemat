@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useAppSelector } from "../redux/hooks";
 import { FaClock, FaUserPlus, FaUserMinus, FaCheckSquare, FaRegSquare } from "react-icons/fa";
+import { pocetneAktivnosti, motivacionePoruke } from "../data/pocetniPodaci";
 import NaslovStranice from "../reusable/NaslovStranice";
 import Logout from "../reusable/Logout";
 import Info from "../reusable/Info";
@@ -8,50 +9,13 @@ import Modal from "../reusable/Modal";
 import Podloga from "../reusable/Podloga";
 
 const Pocetna = () => {
-  const [aktivnosti, setAktivnosti] = useState([
-    {
-      id: 1,
-      naziv: "Usisavanje",
-      termini: [
-        { dan: "utorak", vrijeme: "11:00", zavrseno: true },
-        { dan: "četvrtak", vrijeme: "11:00", zavrseno: false },
-      ],
-      trajanje: "25 min",
-      prijavljeni: ["Tarik", "Anand"],
-      zavrseno: false,
-    },
-    {
-      id: 2,
-      naziv: "Pranje serdžada",
-      termini: [{ dan: "petak", vrijeme: "19:00", zavrseno: false }],
-      trajanje: "1h",
-      prijavljeni: ["Amina", "Selma"],
-      zavrseno: false,
-    },
-    {
-      id: 3,
-      naziv: "Čišćenje abdesthane/toaleta",
-      termini: [
-        { dan: "ponedjeljak", vrijeme: "09:00", zavrseno: true },
-        { dan: "srijeda", vrijeme: "11:00", zavrseno: false },
-        { dan: "petak", vrijeme: "10:00", zavrseno: false },
-      ],
-      trajanje: "45 min - 1h",
-      prijavljeni: ["Tarik", "Anand", "Bilal", "Mirza", "admin"],
-      zavrseno: false,
-    },
-  ]);
+  const [aktivnosti, setAktivnosti] = useState(pocetneAktivnosti);
   const [openModal, setOpenModal] = useState(false);
-
   const { userInfo } = useAppSelector((s) => s.etfszm);
 
-  const motivacionePoruke = [
-    { text: '"I činite dobro - Allah, zaista, voli one koji dobra djela čine."', izvor: "📖 (Kur'an, El-Bekara, 195)" },
-    {
-      text: '"Najbolji među vama su oni koji su najkorisniji ljudima."',
-      izvor: "📜 (Hadis bilježi Taberani)",
-    },
-  ];
+  const brPoruke = useMemo(() => {
+    return Math.floor(Math.random() * motivacionePoruke.length);
+  }, []);
 
   const chekirano = (i: number, j: number) => {
     setAktivnosti((s) =>
@@ -94,8 +58,6 @@ const Pocetna = () => {
     setOpenModal(false);
     document.body.classList.remove("overflow-hidden");
   };
-
-  const brPoruke = Math.floor(Math.random() * motivacionePoruke.length);
 
   return (
     <>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { donacijaInputPolja } from "../data/pocetniPodaci";
 import NaslovStranice from "../reusable/NaslovStranice";
 import Logout from "../reusable/Logout";
 import Info from "../reusable/Info";
@@ -6,13 +7,6 @@ import Modal from "../reusable/Modal";
 import Podloga from "../reusable/Podloga";
 import Dugme from "../reusable/Dugme";
 import Input from "../reusable/Input";
-
-const inputPolja = [
-  { type: "text", placeholder: "Ime vlasnika kartice" },
-  { type: "number", placeholder: "Broj kartice" },
-  { type: "text", placeholder: "MM/YY isteka" },
-  { type: "number", placeholder: "CVC" },
-];
 
 const Donacija = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -38,7 +32,7 @@ const Donacija = () => {
       <Podloga>
         <h2 className="text-left text-xl mb-4 font-semibold">Podaci o kartici</h2>
         <form>
-          {inputPolja.map((props, i) => {
+          {donacijaInputPolja.map((props, i) => {
             return <Input key={i} {...props} />;
           })}
         </form>
