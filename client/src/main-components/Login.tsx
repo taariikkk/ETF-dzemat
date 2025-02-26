@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { setPrijavljen, setUserInfo } from "../redux/etfdzemat";
+import { login } from "../helper-functions/fetch-functions";
 import NaslovStranice from "../reusable/NaslovStranice";
 import Dugme from "../reusable/Dugme";
 import Input from "../reusable/Input";
 import Podloga from "../reusable/Podloga";
-import { login } from "../helper-functions/fetch-functions";
+import NotificationBox from "../reusable/NotificationBox";
 
 const Login = () => {
   const [usernameEmail, setUsernameEmail] = useState("");
@@ -14,7 +15,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { prijavljen } = useAppSelector((s) => s.etfszm);
+  const { prijavljen, notification } = useAppSelector((s) => s.etfszm);
 
   useEffect(() => {
     if (prijavljen) navigate("/početna", { replace: true });
@@ -76,6 +77,7 @@ const Login = () => {
             </a>
           </p>
         </Podloga>
+        <NotificationBox text={notification.text} show={notification.show} type={notification.type} />
       </>
     )
   );

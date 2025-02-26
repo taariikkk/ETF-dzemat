@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { useAppSelector } from "../redux/hooks";
 import { useNavigate } from "react-router";
 import { registracijaInputPolja, registracijaKeys } from "../data/pocetniPodaci";
+import { signup } from "../helper-functions/fetch-functions";
+import { getErrorMessage } from "../helper-functions/error-functions";
+import { useDispatch } from "react-redux";
+import { closeNotification, setNotification } from "../redux/etfdzemat";
 import NaslovStranice from "../reusable/NaslovStranice";
 import Podloga from "../reusable/Podloga";
 import Dugme from "../reusable/Dugme";
 import Input from "../reusable/Input";
-import { signup } from "../helper-functions/fetch-functions";
-import { getErrorMessage } from "../helper-functions/error-functions";
 
 export interface Registracija {
   [key: string]: string;
@@ -26,6 +28,7 @@ const Registracija = () => {
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { prijavljen } = useAppSelector((s) => s.etfszm);
 
   useEffect(() => {
@@ -52,7 +55,18 @@ const Registracija = () => {
         .then((res) => {
           if (res && "message" in res) {
             navigate("/prijava");
+            setTimeout(
+              () =>
+                dispatch(
+                  setNotification({
+                    text: "Uspješna registracija",
+                    type: "success",
+                  })
+                ),
+              50
+            );
           } else setError(getErrorMessage(res));
+          setTimeout(() => dispatch(closeNotification()), 2000);
         })
         .catch((err) => {
           console.log(err);

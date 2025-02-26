@@ -21,6 +21,7 @@ function loadFromSessionStorage(): { etfszm: InitialStateType } | undefined {
             username: null,
             role: null,
           },
+          notification: { text: "", show: false, type: undefined },
         },
       };
       return newReduxStore;
