@@ -23,3 +23,79 @@ html {
 
   scrollbar-width: none;
 }
+
+.saving-wrapper {
+  --checkmark-height: 25px;
+  --checkmark-width: calc(var(--checkmark-height) / 2);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.saving-loader {
+  position: relative;
+  width: calc(var(--checkmark-height) * 1.66);
+  height: calc(var(--checkmark-height) * 1.66);
+  border: 5px solid transparent;
+  border-left-color: rgba(0, 0, 0, 0.5);
+  border-top-color: rgba(0, 0, 0, 0.5);
+  border-bottom-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  animation: loader-spin 1s linear infinite;
+}
+.dark .saving-loader {
+  border-color: white;
+  border-left-color: hsl(0, 0%, 20%);
+}
+.save-completed {
+  -webkit-animation: none;
+  animation: none;
+  border-color: rgba(0, 0, 0, 0.6);
+  border-width: 4px;
+}
+.dark .save-completed {
+  border-left-color: white;
+}
+.checkmark::after {
+  position: absolute;
+  content: "";
+  height: var(--checkmark-height);
+  width: var(--checkmark-width);
+  left: calc(var(--checkmark-height) / 7);
+  top: calc(var(--checkmark-height) / 1.2);
+  opacity: 1;
+  border-right: 4px solid green;
+  border-top: 4px solid green;
+  animation: checkmark 0.3s ease;
+  transform-origin: left top;
+  transform: scaleX(-1) rotate(135deg);
+}
+.dark .checkmark::after {
+  border-color: greenyellow;
+}
+@keyframes loader-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes checkmark {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: var(--checkmark-width);
+    opacity: 1;
+  }
+  100% {
+    height: var(--checkmark-height);
+    width: var(--checkmark-width);
+    opacity: 1;
+  }
+}
