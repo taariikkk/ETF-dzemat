@@ -91,13 +91,13 @@ const Pocetna = () => {
         <p className="text-sm">{motivacionePoruke[brPoruke].izvor}</p>
       </Podloga>
       <Podloga>
-        <h2 className="text-3xl mb-6">
+        <h2 className="text-3xl mb-7">
           Preglednik
           <br />
           aktivnosti
         </h2>
         {aktivnosti.map((aktivnost, i) => (
-          <div key={i} className="bg-white p-4 rounded shadow-md mx-auto mb-4 relative">
+          <div key={i} className="bg-white p-4 rounded shadow-md mx-auto mt-4">
             <h3 className="text-left text-xl font-semibold">{aktivnost.naziv}</h3>
 
             <div className="flex justify-between items-center mt-4">

@@ -44,7 +44,7 @@ const Login = () => {
     !prijavljen && (
       <>
         <NaslovStranice naslovStranice="Prijava" />
-        <Podloga classname="bg-transparent px-0 py-0 max-w-72 text-4xl">
+        <Podloga classname="bg-transparent px-0 py-0 max-w-72">
           <form onSubmit={(e) => handleLogin(e)}>
             <Input
               type="text"
@@ -69,7 +69,7 @@ const Login = () => {
               <Dugme text="Prijavi se" type="submit" />
             </div>
           </form>
-          <p className="mt-4">
+          <p className="mt-6">
             Nemate račun?{" "}
             <a onClick={() => navigate("/registracija")} className="underline cursor-pointer">
               Registrujte se!

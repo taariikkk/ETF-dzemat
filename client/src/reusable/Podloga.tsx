@@ -11,7 +11,7 @@ const Podloga: React.FC<PodlogaProps> = ({ classname, children }) => {
     <div
       // izmedu 83% od w-10/12 i 91% od w-11/12
       style={{ width: "87%" }}
-      className={twMerge("mt-4 max-w-96 px-4 py-6 bg-gray-100 mx-auto rounded-lg", classname)}
+      className={twMerge("mt-4 max-w-96 px-4 pt-6 pb-8 bg-gray-100 mx-auto rounded-lg", classname)}
     >
       {children}
     </div>

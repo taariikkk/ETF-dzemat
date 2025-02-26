@@ -14,7 +14,7 @@ const Donacija = () => {
   return (
     <>
       <NaslovStranice naslovStranice="Donacija" />
-      <Podloga classname="text-4xl">
+      <Podloga>
         <h2 className="text-left text-xl mb-4 font-semibold">Podaci o kartici</h2>
         <form>
           {inputPolja.map((props, i) => {
@@ -23,10 +23,10 @@ const Donacija = () => {
         </form>
         <h2 className="text-left text-xl mt-6 mb-4 font-semibold">Namjena donacije</h2>
         <textarea
-          className="rounded-md px-2 my-2 w-full h-40 min-h-20 max-h-52 overflow-auto"
+          className="rounded-md px-2 py-2 my-2 w-full h-40 min-h-20 max-h-52 overflow-auto"
           placeholder="Uplaćujem u svrhu..."
         />
-        <Dugme text="Uplati" />
+        <Dugme className="mt-2" text="Uplati" />
       </Podloga>
     </>
   );
