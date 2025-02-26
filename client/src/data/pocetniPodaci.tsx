@@ -1,8 +1,18 @@
 export const motivacionePoruke = [
-  { text: '"I činite dobro - Allah, zaista, voli one koji dobra djela čine."', izvor: "📖 (Kur'an, El-Bekara, 195)" },
+  {
+    text: '"I činite dobro - Allah, zaista, voli one koji dobra djela čine."',
+    izvor: "📖 (Kur'an, El-Bekara, 195)",
+  },
+  { text: '"Pomozite jedni drugima u dobročinstvu i bogobojaznosti."', izvor: "📖 (Kur'an, El-Maida, 2)" },
+  { text: '"Onaj ko uradi koliko trun dobra - vidjet će ga."', izvor: "📖 (Kur'an, Ez-Zilzal, 7)" },
+  { text: '"I takmičite se u dobrim djelima..."', izvor: "📖 (Kur'an, El-Bekara, 148)" },
   {
     text: '"Najbolji među vama su oni koji su najkorisniji ljudima."',
     izvor: "📜 (Hadis bilježi Taberani)",
+  },
+  {
+    text: '"Ne potcjenjuj nijedno dobro djelo, makar to bilo da sretneš brata vedra lica."',
+    izvor: "📜 (Hadis bilježi Muslim)",
   },
 ];
 
