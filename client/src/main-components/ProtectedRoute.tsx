@@ -34,13 +34,21 @@ const ProtectedRoute = () => {
   return prijavljen ? (
     <>
       <Outlet />
-      <div onClick={handleModalOpen}>
+      <div onClick={handleModalOpen} style={{ cursor: "pointer" }}>
         <Logout />
       </div>
-      <Modal closeModal={handleModalClose} headerTitle="Da li ste" openModal={modal}>
-        <button onClick={handleLogout}>ok</button>
-        <button onClick={handleModalClose}>no</button>
-      </Modal>
+      {modal && (
+        <Modal closeModal={handleModalClose} headerTitle="Da li ste sigurni da se želite odjaviti?" openModal={modal} hideCloseButton={true}>
+        <div className="flex justify-end gap-4 mt-4">
+          <button className="px-4 py-2 bg-red-500 text-white rounded" onClick={handleLogout}>
+            Da
+          </button>
+          <button className="px-4 py-2 bg-gray-300 rounded" onClick={handleModalClose}>
+            Ne
+          </button>
+        </div>
+      </Modal>      
+      )}
       <Navigacija />
     </>
   ) : (
