@@ -3,7 +3,6 @@ import { useAppSelector } from "../redux/hooks";
 import { FaPlus, FaBook } from "react-icons/fa";
 import { uputstvo } from "../data/pocetniPodaci";
 import NaslovStranice from "../reusable/NaslovStranice";
-import Logout from "../reusable/Logout";
 import Podloga from "../reusable/Podloga";
 import Input from "../reusable/Input";
 
@@ -49,7 +48,6 @@ const Uputstvo = () => {
   return (
     <>
       <NaslovStranice naslovStranice="Uputstvo" />
-      <Logout />
       <Podloga>
         <div className="flex flex-col gap-4">
           {sekcije.map((sekcija) => (

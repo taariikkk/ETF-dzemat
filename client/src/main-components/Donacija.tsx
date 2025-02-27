@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { donacijaInputPolja, historijaDonacija, svrheDonacije } from "../data/pocetniPodaci";
 import NaslovStranice from "../reusable/NaslovStranice";
-import Logout from "../reusable/Logout";
 import Modal from "../reusable/Modal";
 import Podloga from "../reusable/Podloga";
 import Dugme from "../reusable/Dugme";
@@ -56,8 +55,6 @@ const Donacija = () => {
   return (
     <>
       <NaslovStranice naslovStranice="Donacija" />
-      <Logout />
-
       <Modal type={modal.type} headerTitle={modal.title} openModal={modal.open} closeModal={handleModalClose}>
         {modal.type === "info" ? (
           <div>Sadrzaj modala</div>
