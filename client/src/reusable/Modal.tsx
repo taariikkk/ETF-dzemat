@@ -8,9 +8,18 @@ interface ModalProps {
   openModal?: boolean;
   closeModal: () => void;
   children: ReactNode;
+  hideCloseButton?: boolean; // Za uklanjanje "x" na logout stranici
 }
 
-const Modal: FC<ModalProps> = ({ type, headerTitle, className, openModal = true, closeModal, children }) => {
+const Modal: FC<ModalProps> = ({ 
+  type, 
+  headerTitle, 
+  className, 
+  openModal = true, 
+  closeModal, 
+  children, 
+  hideCloseButton = false // Podrazumijevano je prikazano
+}) => {
   const [clickedInsideModal, setClickedInsideModal] = useState(false);
   const turnOffClickedInside = () => setClickedInsideModal(false);
 
@@ -37,9 +46,11 @@ const Modal: FC<ModalProps> = ({ type, headerTitle, className, openModal = true,
         {type !== "static" && (
           <div className="flex items-center pb-6 border-b">
             <h2 className="text-2xl font-semibold w-full">{headerTitle}</h2>
-            <span className="mx-4 text-gray-500 text-3xl cursor-pointer hover:text-black" onClick={closeModal}>
-              &times;
-            </span>
+            {!hideCloseButton && (
+              <span className="mx-4 text-gray-500 text-3xl cursor-pointer hover:text-black" onClick={closeModal}>
+                &times;
+              </span>
+            )}
           </div>
         )}
         {children}
