@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { useAppSelector } from "../redux/hooks";
 import { useNavigate } from "react-router";
 import { registracijaInputPolja, registracijaKeys } from "../data/pocetniPodaci";
+import { signup } from "../helper-functions/fetch-functions";
+import { getErrorMessage } from "../helper-functions/error-functions";
+import { useDispatch } from "react-redux";
+import { closeNotification, setNotification } from "../redux/etfdzemat";
 import NaslovStranice from "../reusable/NaslovStranice";
 import Podloga from "../reusable/Podloga";
 import Dugme from "../reusable/Dugme";
 import Input from "../reusable/Input";
-import { signup } from "../helper-functions/fetch-functions";
-import { getErrorMessage } from "../helper-functions/error-functions";
 
 export interface Registracija {
   [key: string]: string;
@@ -26,6 +28,7 @@ const Registracija = () => {
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { prijavljen } = useAppSelector((s) => s.etfszm);
 
   useEffect(() => {
@@ -43,7 +46,7 @@ const Registracija = () => {
     const { username, email, password, confirmPassword } = registracija;
     if (Object.values(registracija).some((value) => value === "")) setError("Sva polja moraju biti popunjena");
     if (username.length < 2) setError("Korisniško ime mora imati više od dva znaka");
-    else if (!validateEmailFormat(email)) setError("Neispravan email");
+    else if (!validateEmailFormat(email) || !email.endsWith(".unsa.ba")) setError("Neispravan email");
     else if (password.length < 6) setError("Šifra mora biti 6 znakova duga");
     else if (/\s/.test(password)) setError("Šifra ne smije sadržavati praznine");
     else if (!confirmPassword || password !== confirmPassword) setError("Šifre se ne podudaraju");
@@ -52,7 +55,21 @@ const Registracija = () => {
         .then((res) => {
           if (res && "message" in res) {
             navigate("/prijava");
-          } else setError(getErrorMessage(res));
+            setTimeout(
+              () =>
+                dispatch(
+                  setNotification({
+                    text: "Uspješna registracija",
+                    type: "success",
+                  })
+                ),
+              50
+            );
+          } else {
+            setError(getErrorMessage(res));
+            console.log(res, error);
+          }
+          setTimeout(() => dispatch(closeNotification()), 2000);
         })
         .catch((err) => {
           console.log(err);
