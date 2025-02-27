@@ -3,7 +3,6 @@ import { useAppSelector } from "../redux/hooks";
 import { FaClock, FaUserPlus, FaUserMinus, FaCheckSquare, FaRegSquare } from "react-icons/fa";
 import { pocetneAktivnosti, motivacionePoruke } from "../data/pocetniPodaci";
 import NaslovStranice from "../reusable/NaslovStranice";
-import Logout from "../reusable/Logout";
 import Podloga from "../reusable/Podloga";
 
 const Pocetna = () => {
@@ -49,7 +48,6 @@ const Pocetna = () => {
   return (
     <>
       <NaslovStranice naslovStranice={`Dobrodošao ${userInfo.username}`} />
-      <Logout />
       <Podloga>
         <p className="mb-2 text-lg">{motivacionePoruke[brPoruke].text}</p>
         <p className="text-sm">{motivacionePoruke[brPoruke].izvor}</p>

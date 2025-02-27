@@ -65,10 +65,7 @@ const Registracija = () => {
                 ),
               50
             );
-          } else {
-            setError(getErrorMessage(res));
-            console.log(res, error);
-          }
+          } else setError(getErrorMessage(res));
           setTimeout(() => dispatch(closeNotification()), 2000);
         })
         .catch((err) => {

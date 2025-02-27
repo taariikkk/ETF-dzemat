@@ -3,7 +3,6 @@ import { useAppSelector } from "../redux/hooks";
 import { FaShoppingCart, FaPlus, FaTrashAlt } from "react-icons/fa";
 import { shoppingListaStavke } from "../data/pocetniPodaci";
 import NaslovStranice from "../reusable/NaslovStranice";
-import Logout from "../reusable/Logout";
 import Podloga from "../reusable/Podloga";
 import Input from "../reusable/Input";
 
@@ -30,7 +29,6 @@ const ShoppingLista = () => {
   return (
     <>
       <NaslovStranice naslovStranice={"Shopping lista"} />
-      <Logout />
       <Podloga>
         <div className="bg-white p-4 rounded shadow-md min-h-48 mx-auto">
           <h2 className="flex font-semibold items-center text-xl mb-3">
